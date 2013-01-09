@@ -16,7 +16,11 @@
             <?
                 $db = mysqli_connect($_SERVER['RDS_HOSTNAME'], $_SERVER['RDS_USERNAME'], $_SERVER['RDS_PASSWORD'], $_SERVER['RDS_DB_NAME'], $_SERVER['RDS_PORT']);
                 $sql = 'SELECT * FROM users WHERE id = ?';
-                $dbh = $db->prepare($sql);
+                if(!$dbh->prepare($sql))
+                {
+                    echo sprintf('Prepare Failed: %s', $dbh->error);
+                    die;
+                }
                 $id = (int)$_GET['id'];
                 $dbh->bind_param('i', $id);
                 if(!$dbh->execute())
