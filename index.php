@@ -18,14 +18,14 @@
                 $sql = 'SELECT * FROM users WHERE id = ?';
                 if(!($dbh = $db->prepare($sql)))
                 {
-                    trigger_error(sprintf('Prepare Failed: %s', $dbh->error), E_USER_WARNING);
+                    trigger_error(sprintf('Prepare Failed: %s', $db->error), E_USER_WARNING);
                     die;
                 }
                 $id = (int)$_GET['id'];
                 $dbh->bind_param('i', $id);
                 if(!$dbh->execute())
                 {
-                    trigger_error(sprintf('Query Failed: %s', $dbh->error), E_USER_WARNING);
+                    trigger_error(sprintf('Query Failed: %s', $db->error), E_USER_WARNING);
                     die;
                 }
                 $row = $dbh->get_result()->fetch_assoc();
