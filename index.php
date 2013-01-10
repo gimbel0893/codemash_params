@@ -25,7 +25,7 @@
                 $dbh->bind_param('i', $id);
                 if(!$dbh->execute())
                 {
-                    trigger_error(sprintf('Query Failed: %s', $db->error), E_USER_WARNING);
+                    trigger_error(sprintf('Query Failed: %s', $dbh->error), E_USER_WARNING);
                     die;
                 }
                 $row = $dbh->get_result()->fetch_assoc();
